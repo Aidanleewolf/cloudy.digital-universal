@@ -149,7 +149,7 @@ gamelabel.BackgroundTransparency = 1.000
 gamelabel.Position = UDim2.new(0, 120, 0, 48)
 gamelabel.Size = UDim2.new(0.582110107, -12, 0, 18)
 gamelabel.Font = Enum.Font.Code
-gamelabel.Text = "egg dogg"
+gamelabel.Text = "universal"
 gamelabel.TextColor3 = Color3.fromRGB(210, 210, 210)
 gamelabel.TextSize = 15.000
 gamelabel.TextStrokeTransparency = 0.000
@@ -268,7 +268,7 @@ loadbutton.Text = ""
 loadbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
 loadbutton.TextSize = 14.000
 loadbutton.MouseButton1Click:Connect(function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/Aidanleewolf/nohat.club/main/main", true))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Aidanleewolf/nohat.club-universal/main/main", true))()
 	game.CoreGui.loader:Destroy()
 end)
 
