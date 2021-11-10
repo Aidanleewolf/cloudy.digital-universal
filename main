@@ -108,9 +108,9 @@ local findFirstChild = game.FindFirstChild
 local findFirstChildOfClass = game.FindFirstChildOfClass
 local isDescendantOf = game.IsDescendantOf
 
--- Just to check another nohat.club instance is running and close it
+-- Just to check if another cloudy.digital instance is running and close it
 local uid = tick() .. math.random(1,100000) .. math.random(1,100000)
-if shared.NHT and shared.NHT.close and shared.NHT.uid~=uid then shared.NHT:close() end
+if shared.cld and shared.cld.close and shared.cld.uid~=uid then shared.cld:close() end
 
 -- Main shitty script should start below here
 
@@ -122,7 +122,7 @@ local serializer = {}
 
 local settings = {}
 
-local hud = loadstring(game:HttpGet("https://raw.githubusercontent.com/Aidanleewolf/nohat.club-universal/main/ui-lib", DEBUG_MODE == false and true or DEBUG_MODE == true and false))()[1] -- Ugly ui do not care
+local hud = loadstring(game:HttpGet("https://raw.githubusercontent.com/Aidanleewolf/cloudy.digital-universal/main/ui-lib", DEBUG_MODE == false and true or DEBUG_MODE == true and false))()[1] -- Ugly ui do not care
 
 local aimbot = {}
 
@@ -134,7 +134,7 @@ local boxes = {}
 local tracers = {}
 
 local run = {}
-local NHT = {enabled = true;}
+local cld = {enabled = true;}
 
 
 local visiblekids = {} -- no need to check twice each frame yes? todo :(
@@ -268,7 +268,7 @@ do
 	end
 
 	spawn(function()
-		while NHT and NHT.enabled do -- Some games are gay
+		while cld and cld.enabled do -- Some games are gay
 			utility.mychar = utility.getcharacter(locpl)
 			if (utility.mychar ~= nil) then
 				utility.myroot = utility.getroot(locpl)
@@ -447,7 +447,7 @@ do
 	end
 
 	spawn(function()
-		while NHT and NHT.enabled do
+		while cld and cld.enabled do
 			for i,v in pairs(hashes) do
 				hashes[i] = nil
 				wait()
@@ -770,7 +770,7 @@ do
 	--/ Settings
 
 	-- TODO: Other datatypes.
-	settings.fileName = "nohat_club_settings.txt"
+	settings.fileName = "cloudy_digital_settings.txt"
 	settings.saved = {}
 
 	function settings:Get(name, default)
@@ -835,7 +835,7 @@ do
 	settings:Load()
 
 	spawn(function()
-		while NHT and NHT.enabled do
+		while cld and cld.enabled do
 			settings:Save()
 			wait(5)
 		end
@@ -879,7 +879,7 @@ do
 					return Value
 				end
 			end
-			warn(("NHT_ERROR : AimbotSettings : Tried to index %s"):format(tostring(index)))
+			warn(("cld_ERROR : AimbotSettings : Tried to index %s"):format(tostring(index)))
 		end;
 		__newindex = function(self, index, value)
 			if typeof(value) ~= "function" then
@@ -1079,7 +1079,7 @@ do
 					return Value
 				end
 			end
-			warn(("NHT_ERROR : CrosshairSettings : Tried to index %s"):format(tostring(index)))
+			warn(("cld_ERROR : CrosshairSettings : Tried to index %s"):format(tostring(index)))
 		end;
 		__newindex = function(self, index, value)
 			if typeof(value) ~= "function" then
@@ -1236,7 +1236,7 @@ do
 					return Value
 				end
 			end
-			warn(("NHT_ERROR : TracersSettings : Tried to index %s"):format(tostring(index)))
+			warn(("cld_ERROR : TracersSettings : Tried to index %s"):format(tostring(index)))
 		end;
 		__newindex = function(self, index, value)
 			if typeof(value) ~= "function" then
@@ -1401,7 +1401,7 @@ do
 					return Value
 				end
 			end
-			warn(("NHT_ERROR : EspSettings : Tried to index %s"):format(tostring(index)))
+			warn(("cld_ERROR : EspSettings : Tried to index %s"):format(tostring(index)))
 		end;
 		__newindex = function(self, index, value)
 			if typeof(value) ~= "function" then
@@ -1565,7 +1565,7 @@ do
 					return Value
 				end
 			end
-			warn(("NHT_ERROR : BoxesSettings : Tried to index %s"):format(tostring(index)))
+			warn(("cld_ERROR : BoxesSettings : Tried to index %s"):format(tostring(index)))
 		end;
 		__newindex = function(self, index, value)
 			if typeof(value) ~= "function" then
@@ -1824,7 +1824,7 @@ do
 		local viewportsize = camera.ViewportSize
 		if credits == nil then
 			credits = newdrawing("Text", {
-				Text = "nohat.club";
+				Text = "cloudy.digital";
 				Color = Color3.new(255,255,255);
 				Size = 25.0;
 				Transparency = .8;
@@ -1946,7 +1946,7 @@ do
 	end
 
 	spawn(function()
-		while NHT and NHT.enabled do -- I dont know why I am doing this
+		while cld and cld.enabled do -- I dont know why I am doing this
 			for i,v in pairs(hashes) do
 				hashes[i] = nil
 				wait()
@@ -2007,7 +2007,7 @@ do
 	local fireonthink = event.new(run.onthink)
 	local fireonrender = event.new(run.onrender)
 
-	local rstname = "NH.Renderstep"
+	local rstname = "cd.Renderstep"
 	bindEvent(renderstep, function(delta)
 		profilebegin(rstname)
 		local ntime = tick()
@@ -2019,7 +2019,7 @@ do
 			profilebegin(v.name)
 			xpcall(v.func, function(err)
 				if (DEBUG_MODE == true) then
-					Warn("NHT_ERROR (RENDERSTEPPED) : Failed to run %s! %s | %s", v.name, tostring(err), debug.traceback())
+					Warn("cld_ERROR (RENDERSTEPPED) : Failed to run %s! %s | %s", v.name, tostring(err), debug.traceback())
 				end
 				engine[i] = nil
 			end, run.dt)
@@ -2030,7 +2030,7 @@ do
 		profileend(rstname)
 	end)
 
-	local hbtname = "NH.Heartbeat"
+	local hbtname = "cd.Heartbeat"
 	bindEvent(heartbeat, function(delta)
 		profilebegin(hbtname)
 
@@ -2039,7 +2039,7 @@ do
 			profilebegin(v.name)
 			xpcall(v.func, function(err)
 				if (DEBUG_MODE == true) then
-					Warn("NHT_ERROR (HEARTBEAT) : Failed to run %s! %s | %s", v.name, tostring(err), debug.traceback())
+					Warn("cld_ERROR (HEARTBEAT) : Failed to run %s! %s | %s", v.name, tostring(err), debug.traceback())
 				end
 				heartengine[i] = nil
 			end, delta)
@@ -2050,7 +2050,7 @@ do
 		profileend(hbtname)
 	end)
 
-	local stpname = "NH.Stepped"
+	local stpname = "cd.Stepped"
 	bindEvent(stepped, function(delta)
 
 		profilebegin(stpname)
@@ -2060,7 +2060,7 @@ do
 			profilebegin(v.name)
 			xpcall(v.func, function(err)
 				if (DEBUG_MODE == true) then
-					Warn("NHT_ERROR (STEPPED) : Failed to run %s! %s | %s", v.name, tostring(err), debug.traceback())
+					Warn("cld_ERROR (STEPPED) : Failed to run %s! %s | %s", v.name, tostring(err), debug.traceback())
 				end
 				heartengine[i] = nil
 			end, delta)
@@ -2076,8 +2076,8 @@ do
 	--/ Main or something I am not sure what I am writing anymore
 	settings:Save()
 
-	NHT.enabled = true
-	function NHT:close()
+	cld.enabled = true
+	function cld:close()
 		spawn(function() pcall(visuals.End, visuals) end)
 		spawn(function() pcall(aimbot.End, aimbot) end)
 		spawn(function() pcall(hud.End, hud) end)
@@ -2086,24 +2086,24 @@ do
 				pcall(function() v:Disconnect() end)
 			end
 		end)
-		NHT = nil
-		shared.NHT = nil -- k
+		cld = nil
+		shared.cld = nil -- k
 
 		settings:Save()
 	end
 
-	NHT.visible = hud.Visible
-	function NHT:show()
+	cld.visible = hud.Visible
+	function cld:show()
 		hud:show()
-		NHT.visible = hud.Visible
+		cld.visible = hud.Visible
 	end
 
-	function NHT:hide()
+	function cld:hide()
 		hud:hide()
-		NHT.visible = hud.Visible
+		cld.visible = hud.Visible
 	end
 
-	setmetatable(NHT, {
+	setmetatable(cld, {
 		__newindex = function(self, index, value)
 			if (index == "Keybind") then
 				settings:Set("hud.keybind", value)
@@ -2113,7 +2113,7 @@ do
 		end;
 	})
 
-	shared.NHT = NHT
+	shared.cld = cld
 
 	local players = game:GetService("Players")
 	local loc = players.LocalPlayer
@@ -2441,7 +2441,7 @@ end)
 Hud:AddButton({
 	Text = "Exit"
 }, function()
-	NHT:close()
+	cld:close()
 end)
 
-warn("NHT_MAIN : Reached end of script")
+warn("cld_MAIN : Reached end of script")
