@@ -268,7 +268,7 @@ loadbutton.Text = ""
 loadbutton.TextColor3 = Color3.fromRGB(0, 0, 0)
 loadbutton.TextSize = 14.000
 loadbutton.MouseButton1Click:Connect(function()
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/Aidanleewolf/cloudy.digital/main/main", true))()
+	loadstring(game:HttpGet("https://raw.githubusercontent.com/Aidanleewolf/cloudy.digital-universal/main/main", true))()
 	game.CoreGui.loader:Destroy()
 end)
 
